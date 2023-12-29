@@ -41,8 +41,8 @@ const Login = () => {
   };
 
   return (
-    <main className="flex flex-wrap flex-row items-center justify-between max-w-md mx-auto p-6">
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 p-5 dark:bg-teal-950 ">
+    <main className="flex space-x-10">
+      <div className="flex flex-col items-center justify-center mt-[30rem] mb-[30rem] ml-10 w-[60rem] h-[70rem] px-28 pt-20 bg-emerald-50 dark:bg-gradient-to-r from-slate-900 via-emerald-900 to-sky-900">
         <Image
           src="/login.png"
           alt="Login Page"
@@ -64,7 +64,7 @@ const Login = () => {
         </p>
       </div>
 
-      <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex flex-col justify-center mt-[30rem] mb-[30rem] w-[70rem] bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <div className="p-4 sm:p-7">
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
@@ -113,12 +113,6 @@ const Login = () => {
                     >
                       Password
                     </label>
-                    <a
-                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                      href="../examples/html/recover-account.html"
-                    >
-                      Forgot password?
-                    </a>
                   </div>
                   <div className="relative">
                     <input
@@ -130,6 +124,12 @@ const Login = () => {
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                     />
                     <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                      <a
+                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        href="../examples/html/recover-account.html"
+                      >
+                        Forgot password?
+                      </a>
                       <svg
                         className="h-5 w-5 text-red-500"
                         width="16"
@@ -153,13 +153,19 @@ const Login = () => {
                       className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                     />
                   </div>
-                  <div className="ms-3">
+                  <div className="ms-3 flex flex-row justify-around">
                     <label
                       htmlFor="remember-me"
                       className="text-sm dark:text-white"
                     >
                       Remember me
                     </label>
+                    <a
+                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                      href="../examples/html/recover-account.html"
+                    >
+                      Forgot password?
+                    </a>
                   </div>
                 </div>
 
@@ -185,7 +191,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 p-5 dark:bg-teal-950">
+      <div className="flex flex-col items-center justify-center mt-[30rem] mb-[30rem] mr-10 w-[60rem] h-[70rem] px-20 pt-20 bg-emerald-50 dark:bg-gradient-to-r from-slate-900 via-emerald-900 to-sky-900">
         <Image
           src="/login.png"
           alt="Login Page"

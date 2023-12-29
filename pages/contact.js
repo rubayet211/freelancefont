@@ -1,9 +1,11 @@
 import Image from "next/image";
 import React from "react";
+import Header from "./components/header";
 
 export default function Contact() {
   return (
-    <div>
+    <div className="">
+      <Header title="Contact" />
       <section className="text-gray-600 body-font relative ">
         <div className="absolute inset-0 pl-10">
           <Image

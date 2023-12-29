@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-slate-100 py-10 px-4 sm:px-6 lg:px-8 mx-auto dark:bg-sky-950 bg-opacity-50">
+    <footer className="w-full bg-violet-100 px-4 sm:px-6 lg:px-8 mx-auto dark:bg-sky-950 bg-opacity-50 pt-5">
       <div className="text-center">
         <div>
           <Link
@@ -16,24 +16,24 @@ export default function Footer() {
         </div>
 
         <div className="mt-3">
-          <p className="text-gray-200 dark:text-gray-100">
+          <p className="text-sky-950 dark:text-gray-100">
             We are Freelance,
             <a
-              className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-200 dark:hover:text-blue-400"
+              className="font-semibold text-blue-600 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400"
               href="#"
             >
               The Best Freelancing Website
             </a>{" "}
             available.
           </p>
-          <p className="text-gray-200 dark:text-gray-100">
+          <p className="text-sky-950 dark:text-gray-100">
             © Freelance. 2023 FreelanceBD. All rights reserved.
           </p>
         </div>
 
         <div className="mt-3 space-x-2">
           <a
-            className="inline-flex justify-center items-center w-10 h-10 text-center text-gray-200 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
+            className="inline-flex justify-center items-center w-10 h-10 text-center text-sky-950 hover:bg-emerald-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
             href="#"
           >
             <svg
@@ -48,7 +48,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            className="inline-flex justify-center items-center w-10 h-10 text-center text-gray-200 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
+            className="inline-flex justify-center items-center w-10 h-10 text-center text-sky-950 hover:bg-emerald-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
             href="#"
           >
             <svg
@@ -63,7 +63,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            className="inline-flex justify-center items-center w-10 h-10 text-center text-gray-200 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
+            className="inline-flex justify-center items-center w-10 h-10 text-center text-sky-950 hover:bg-emerald-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
             href="#"
           >
             <svg
@@ -78,7 +78,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            className="inline-flex justify-center items-center w-10 h-10 text-center text-gray-200 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
+            className="inline-flex justify-center items-center w-10 h-10 text-center text-sky-950 hover:bg-emerald-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-200 dark:hover:text-gray-200 dark:hover:bg-slate-700"
             href="#"
           >
             <svg

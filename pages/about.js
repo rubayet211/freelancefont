@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Header from "./components/header";
 
 export default function About() {
   return (
     <body className="py-20">
+      <Header title="About" />
       <h1 className="text-4xl font-bold text-center text-emerald-500">ABOUT</h1>
       <div className="flex flex-col md:flex-row justify-around items-center">
         <div className="mb-4 md:mb-0">
