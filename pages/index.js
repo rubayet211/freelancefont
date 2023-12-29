@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Modal from "./Modal";
-import Button from "./Button";
+import Modal from "./components/Modal";
+import Button from "./components/Button";
 import axios from "axios";
-import Navbar from "./Navbar";
+import Navbar from "./components/Navbar";
 import { useRouter } from "next/router";
 import Hero from "./Hero";
 import Companies from "./Companies"
@@ -25,29 +25,29 @@ const Home = () => {
     const [error, setError] = useState("");
     const [errorfree, setErrorFree] = useState("");
 
-    const [clients, setClients] = useState([]);
-    const [freelancers, setFreelancers] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [freelancers, setFreelancers] = useState([]);
 
-    const urlClients = "http://localhost:3000/clients";
-    const urlFreelancers = "http://localhost:3000/freelancer";
+  const urlClients = "http://localhost:3000/clients";
+  const urlFreelancers = "http://localhost:3000/freelancer";
 
-    const router = useRouter();
+  const router = useRouter();
 
-    useEffect(() => {
-        const getClients = async () => {
-            const { data: res } = await axios.get(urlClients);
-            setClients(res);
-        };
-        getClients();
-    }, [])
+  useEffect(() => {
+    const getClients = async () => {
+      const { data: res } = await axios.get(urlClients);
+      setClients(res);
+    };
+    getClients();
+  }, []);
 
-    useEffect(() => {
-        const getFreelancers = async () => {
-            const { data: res } = await axios.get(urlFreelancers);
-            setFreelancers(res);
-        };
-        getFreelancers();
-    }, [])
+  useEffect(() => {
+    const getFreelancers = async () => {
+      const { data: res } = await axios.get(urlFreelancers);
+      setFreelancers(res);
+    };
+    getFreelancers();
+  }, []);
 
     function openSignInModal() {
         setShowSignInModal(true);
@@ -58,6 +58,7 @@ const Home = () => {
     function openSignUpModal() {
         setShowSignUpModal(true);
     }
+  }
 
     function closeSignInModal() {
         setShowSignInModal(false);
@@ -92,6 +93,7 @@ const Home = () => {
         }else{
             setError("Enter Credentials");
         }
+      />
 
     }
     async function handlesubmitfreelancer(e) {

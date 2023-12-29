@@ -1,11 +1,11 @@
-import Modal from "./Modal";
-import Navbar from "./Navbar";
+import Modal from "./components/Modal";
+import Navbar from "./components/Navbar";
 
 const test = () => {
-    return ( 
-        // <Modal/>
-        <Navbar/>
-     );
-}
- 
+  return (
+    // <Modal/>
+    <Navbar />
+  );
+};
+
 export default test;

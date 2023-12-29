@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import Card from './Card'
+import React, { useEffect, useState } from "react";
+import Card from "./Card";
 import Slider from "react-slick";
-import axios from 'axios';
+import axios from "axios";
 
 const Courses = () => {
   var settings = {
@@ -11,48 +11,51 @@ const Courses = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        infinite: false,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false,
-        dots: true
-      }
-    }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
-  ]
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
+        },
+      },
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ],
   };
 
   const [projects, setProjects] = useState([]);
-  useEffect(()=>{
-    const getProjects = async ()=>{
-      const resData = await axios.get("http://localhost:3000/clients/projects");
+  useEffect(() => {
+    const getProjects = async () => {
+      const resData = await axios.get(
+        "http://localhost:3000/clients/projects",
+        { withCredentials: true }
+      );
       console.log(resData.data);
       setProjects(resData.data);
-    }
+    };
     getProjects();
-  },[]);
+  }, []);
 
   return (
     <div className='w-full bg-[#E9F8F3B2]'>
@@ -71,8 +74,16 @@ const Courses = () => {
             
         </div>
 
+        <Slider {...settings} className="px-5">
+          {projects.map((project, i) => (
+            <div key={i}>
+              <Card course={project} />
+            </div>
+          ))}
+        </Slider>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Courses
+export default Courses;

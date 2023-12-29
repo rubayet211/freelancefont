@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { GoSignOut } from "react-icons/go";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,7 @@ const Sidebar = () => {
         className="p-4 bg-blue-500 text-white rounded transform hover:scale-105 transition-transform dark:bg-blue-700"
         onClick={toggleDrawer}
       >
-        Open Sidebar
+        <GoSignOut />
       </button>
 
       <div
