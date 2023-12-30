@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    @apply bg-gradient-to-r from-emerald-50 to-blue-50 dark:bg-gradient-to-t dark:from-slate-900 dark:to-blue-900;
+  }
+  
+  body {
+    @apply h-full;
+  }

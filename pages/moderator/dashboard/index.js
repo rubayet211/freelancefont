@@ -1,13 +1,13 @@
 import React from "react";
 
 import Image from "next/image";
-import Sidebar from "./components/sidebar";
+import Sidebar from "../components/sidebar";
 
 export default function Dashboard() {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden ml-24">
+      <div className="flex-1 flex flex-col overflow-hidden ml-48">
         <main className="flex-1 overflow-x-hidden overflow-y-auto ">
           <div className="container mx-auto px-6 py-8">
             <h3 className="text-gray-700 text-3xl font-medium">Dashboard</h3>

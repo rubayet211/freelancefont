@@ -14,6 +14,7 @@ import Link from "next/link";
 const Home = () => {
   const [signInModalVisibility, setShowSignInModal] = useState(false);
   const [signUpModalVisibility, setShowSignUpModal] = useState(false);
+  const [admodSignModal, setAdmodSignModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const [error, setError] = useState("");
@@ -54,6 +55,10 @@ const Home = () => {
   }
   function closeSignUpModal() {
     setShowSignUpModal(false);
+  }
+
+  function closeModal() {
+    setAdmodSignModal(false);
   }
 
   async function handlesubmit(e) {
@@ -216,8 +221,51 @@ const Home = () => {
           }
         />
       )}
+      {admodSignModal && (
+        <Modal
+          closeModal={closeModal}
+          content={
+            <>
+              <div class="border-[#20bc74] border-4 h-[500px] w-[500px] grid grid-cols-2">
+                <Link
+                  href="/signup/admin"
+                  className="text-center border-[#20bc74] border-r-2 bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]"
+                >
+                  <p className="text-black text-3xl font-bold py-3 px-5 text-center">
+                    Sign in as Admin
+                  </p>
+                  <p className="text-black text-xl font-bold py-3 px-5">
+                    Admin access to the platform
+                  </p>
+                </Link>
+                <Link
+                  href="/moderator/Login"
+                  className="border-black text-center bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]"
+                >
+                  <p className="text-black text-3xl font-bold py-3 px-5">
+                    Sign in as Moderator
+                  </p>
+                  <p className="text-black text-xl font-bold py-3 px-5">
+                    Moderator access to the platform
+                  </p>
+                </Link>
+              </div>
+            </>
+          }
+        />
+      )}
+
       <Achievement />
       <Courses />
+      <div className="flex justify-center">
+        <button
+          className="group-hover:block text-transparent hover:text-white hover:bg-green-500 font-bold py-2 px-4 rounded"
+          onClick={() => setAdmodSignModal(true)}
+        >
+          Privilege
+        </button>
+      </div>
+
       <Footer />
     </>
   );
