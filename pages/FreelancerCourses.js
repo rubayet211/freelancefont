@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Card from './Card'
+import FreelancerCard from './FreelancerCard'
 import Slider from "react-slick";
 import axios from 'axios';
 
-const Courses = () => {
+const FreelancerCourses = () => {
   var settings = {
     dots: true,
     infinite: false,
@@ -47,7 +47,7 @@ const Courses = () => {
   const [projects, setProjects] = useState([]);
   useEffect(()=>{
     const getProjects = async ()=>{
-      const resData = await axios.get("http://localhost:3000/clients/projects");
+      const resData = await axios.get("http://localhost:3000/freelancer");
       console.log(resData.data);
       setProjects(resData.data);
     }
@@ -55,17 +55,17 @@ const Courses = () => {
   },[]);
 
   return (
-    <div className='w-full bg-[#E9F8F3B2]'>
+    <div className='w-full bg-[#E9F8F3B2] py-2'>
         <div className='md:max-w-[1480px] m-auto max-w-[600px]  px-4 md:px-0'>
             <div className='py-4'>
-              <h1 className='py-3 text-3xl font-bold'>Most Popular <span className='text-[#20B486]'>Projects</span></h1>
+              <h1 className='py-3 text-3xl font-bold'>Our <span className='text-[#20B486]'>Freelancers</span></h1>
               <p className='text-[#6D737A]'>Various versions have evolved over the years, sometimes by accident.</p>
             </div>
             
             <Slider {...settings} className='px-5'>
               {projects.map((project,i)=>
                 <div key={i}>
-                  <Card course={project} />
+                  <FreelancerCard course={project} />
                 </div> ) }
             </Slider>
             
@@ -75,4 +75,4 @@ const Courses = () => {
   )
 }
 
-export default Courses
+export default FreelancerCourses

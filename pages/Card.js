@@ -10,7 +10,7 @@ const Card = ({course}) => {
         />
         <div className='p-5 border border-b'>
             <h1 className='py-2 truncate'>{course.projectTitle}</h1>
-            <StarRating rating={course.rating}/>
+            {/* <StarRating rating={course.rating}/> */}
         </div>
         <h3 className='p-5 text-xl'>{course.projectBudget}</h3>
 

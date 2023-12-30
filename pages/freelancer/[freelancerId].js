@@ -1,9 +1,7 @@
 import { useRouter } from "next/router";
 import Navbar from "../Navbar";
-import Button from "../Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ProjectsCarousel from '../ProjectsCarousel'
 
 const client = () => {
 
@@ -12,12 +10,9 @@ const client = () => {
     const [data, setData] = useState([]);
 
     const router = useRouter();
-    const id = router.query.clientid;
-    // console.log(id === undefined);
-    const url = "http://localhost:3000/clients/";
+    const id = router.query.freelancerId;
+    const url = "http://localhost:3000/freelancer/";
     const path = url.concat(id);
-    // console.log(path);
-    // console.log(path === null);
 
     if (id != undefined && path != undefined) {
         useEffect(() => {
@@ -27,10 +22,8 @@ const client = () => {
                         id: id
                     },
                 })
-                // console.log(res.data.Projects);
                 setName(res.data.name);
                 setImage(res.data.image);
-                setData(res.data.Projects);
             };
             result();
         }, []);
@@ -176,7 +169,6 @@ const client = () => {
                             <div class=""></div>
 
                             <div class="bg-white shadow-sm rounded-sm">
-                                <ProjectsCarousel clientId={data} />
                                 {/* <div class="grid grid-cols-2">
                                     <div>
                                         <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">

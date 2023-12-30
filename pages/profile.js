@@ -1,42 +1,6 @@
-import { useRouter } from "next/router";
-import Navbar from "../Navbar";
-import Button from "../Button";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import ProjectsCarousel from '../ProjectsCarousel'
+import Navbar from "./Navbar";
 
-const client = () => {
-
-    const [Name, setName] = useState("");
-    const [Image, setImage] = useState("");
-    const [data, setData] = useState([]);
-
-    const router = useRouter();
-    const id = router.query.clientid;
-    // console.log(id === undefined);
-    const url = "http://localhost:3000/clients/";
-    const path = url.concat(id);
-    // console.log(path);
-    // console.log(path === null);
-
-    if (id != undefined && path != undefined) {
-        useEffect(() => {
-            const result = async () => {
-                const res = await axios.get(path, {
-                    params: {
-                        id: id
-                    },
-                })
-                // console.log(res.data.Projects);
-                setName(res.data.name);
-                setImage(res.data.image);
-                setData(res.data.Projects);
-            };
-            result();
-        }, []);
-    }
-
-
+const Profile = () => {
     return (
         <>
             <Navbar design="flex justify-between items-center py-3 px-5"
@@ -50,18 +14,18 @@ const client = () => {
                         </div>
                     </>
                 } />
-            <div class="h-screen overflow-hidden flex justify-center">
-                <div class="container p-5">
+            <div class="h-screen overflow-hidden flex items-center justify-center">
+                <div class="container mx-auto my-5 p-5">
                     <div class="md:flex no-wrap md:-mx-2 ">
                         <div class="w-full md:w-3/12 md:mx-2">
                             <div class="bg-white p-3 border-t-4 border-green-400">
-                                <div class="image overflow-hidden h-[100px] w-[100px]">
-                                    <img class="h-full w-full"
-                                        src={Image}
-                                        alt="Image Not Found" />
+                                <div class="image overflow-hidden">
+                                    <img class="h-auto w-full mx-auto"
+                                        src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+                                        alt="LALALAAL" />
                                 </div>
-                                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{Name}</h1>
-                                {/* <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3> */}
+                                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>
+                                <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
                                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
                                     consectetur adipisicing elit.
                                     Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
@@ -72,15 +36,15 @@ const client = () => {
                                         <span class="ml-auto"><span
                                             class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
                                     </li>
-                                    {/* <li class="flex items-center py-3">
+                                    <li class="flex items-center py-3">
                                         <span>Member since</span>
                                         <span class="ml-auto">Nov 07, 2016</span>
-                                    </li> */}
+                                    </li>
                                 </ul>
                             </div>
                             <div class="my-4"></div>
-                            {/* <div class="bg-white p-3 hover:shadow"> */}
-                            {/* <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                            <div class="bg-white p-3 hover:shadow">
+                                <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
                                     <span class="text-green-500">
                                         <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
@@ -89,37 +53,37 @@ const client = () => {
                                         </svg>
                                     </span>
                                     <span>Similar Profiles</span>
-                                </div> */}
-                            {/* /*<div class="grid grid-cols-3"> */}
-                            {/* <div class="text-center my-2"> */}
-                            {/* <img class="h-20 w-20 rounded-full mx-auto" */}
-                            {/* src={ Image } */}
-                            {/* alt="" /> */}
-                            {/* <a href="#" class="text-main-color">Kojstantin</a> */}
-                            {/* </div> */}
-                            {/* <div class="text-center my-2"> */}
-                            {/* <img class="h-16 w-16 rounded-full mx-auto" */}
-                            {/* src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4" */}
-                            {/* alt="" /> */}
-                            {/* <a href="#" class="text-main-color">James</a> */}
-                            {/* </div> */}
-                            {/* <div class="text-center my-2"> */}
-                            {/* <img class="h-16 w-16 rounded-full mx-auto" */}
-                            {/* src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg" */}
-                            {/* alt="" /> */}
-                            {/* <a href="#" class="text-main-color">Natie</a> */}
-                            {/* </div> */}
-                            {/* <div class="text-center my-2"> */}
-                            {/* <img class="h-16 w-16 rounded-full mx-auto" */}
-                            {/* src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png" */}
-                            {/* alt="" /> */}
-                            {/* <a href="#" class="text-main-color">Casey</a> */}
-                            {/* </div> */}
-                            {/* </div> */}
-                            {/* </div> */}
+                                </div>
+                                <div class="grid grid-cols-3">
+                                    <div class="text-center my-2">
+                                        <img class="h-16 w-16 rounded-full mx-auto"
+                                            src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                                            alt="" />
+                                        <a href="#" class="text-main-color">Kojstantin</a>
+                                    </div>
+                                    <div class="text-center my-2">
+                                        <img class="h-16 w-16 rounded-full mx-auto"
+                                            src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
+                                            alt="" />
+                                        <a href="#" class="text-main-color">James</a>
+                                    </div>
+                                    <div class="text-center my-2">
+                                        <img class="h-16 w-16 rounded-full mx-auto"
+                                            src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+                                            alt="" />
+                                        <a href="#" class="text-main-color">Natie</a>
+                                    </div>
+                                    <div class="text-center my-2">
+                                        <img class="h-16 w-16 rounded-full mx-auto"
+                                            src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
+                                            alt="" />
+                                        <a href="#" class="text-main-color">Casey</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="w-full md:w-9/12 mx-2 h-64">
-                            {/* <div class="bg-white p-3 shadow-sm rounded-sm">
+                            <div class="bg-white p-3 shadow-sm rounded-sm">
                                 <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                                     <span clas="text-green-500">
                                         <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -171,13 +135,13 @@ const client = () => {
                                 <button
                                     class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
                                     Full Information</button>
-                            </div> */}
+                            </div>
 
-                            <div class=""></div>
+                            <div class="my-4"></div>
 
-                            <div class="bg-white shadow-sm rounded-sm">
-                                <ProjectsCarousel clientId={data} />
-                                {/* <div class="grid grid-cols-2">
+                            <div class="bg-white p-3 shadow-sm rounded-sm">
+
+                                <div class="grid grid-cols-2">
                                     <div>
                                         <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                                             <span clas="text-green-500">
@@ -233,7 +197,7 @@ const client = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -242,7 +206,6 @@ const client = () => {
         </>
 
     );
-
 }
 
-export default client;
+export default Profile;

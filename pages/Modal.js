@@ -1,5 +1,3 @@
-import Button from "./Button";
-
 
 function Modal({ closeModal , content }) {
 

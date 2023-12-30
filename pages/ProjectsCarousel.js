@@ -3,7 +3,7 @@ import Card from './Card'
 import Slider from "react-slick";
 import axios from 'axios';
 
-const Courses = () => {
+const ProjectsCarousel = ({clientId}) => {
   var settings = {
     dots: true,
     infinite: false,
@@ -44,26 +44,18 @@ const Courses = () => {
   ]
   };
 
-  const [projects, setProjects] = useState([]);
-  useEffect(()=>{
-    const getProjects = async ()=>{
-      const resData = await axios.get("http://localhost:3000/clients/projects");
-      console.log(resData.data);
-      setProjects(resData.data);
-    }
-    getProjects();
-  },[]);
+  console.log(clientId);
 
   return (
     <div className='w-full bg-[#E9F8F3B2]'>
         <div className='md:max-w-[1480px] m-auto max-w-[600px]  px-4 md:px-0'>
-            <div className='py-4'>
-              <h1 className='py-3 text-3xl font-bold'>Most Popular <span className='text-[#20B486]'>Projects</span></h1>
-              <p className='text-[#6D737A]'>Various versions have evolved over the years, sometimes by accident.</p>
+            <div className=''>
+              <h1 className='px-5 text-3xl font-bold'>Your <span className='text-[#20B486]'>Projects</span></h1>
+              <p className='px-5 text-[#6D737A]'>Various versions have evolved over the years, sometimes by accident.</p>
             </div>
             
             <Slider {...settings} className='px-5'>
-              {projects.map((project,i)=>
+              {clientId.map((project,i)=>
                 <div key={i}>
                   <Card course={project} />
                 </div> ) }
@@ -75,4 +67,4 @@ const Courses = () => {
   )
 }
 
-export default Courses
+export default ProjectsCarousel;

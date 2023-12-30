@@ -9,13 +9,21 @@ import Companies from "./Companies"
 import Footer from "./Footer"
 import Achievement from "./Achievement"
 import Courses from "./Courses"
+import FreelancerCourses from './FreelancerCourses'
 
 const Home = () => {
     const [signInModalVisibility, setShowSignInModal] = useState(false);
+    const [signInfreelancerModalVisibility, setShowSignInfreelancerModal] = useState(false);
     const [signUpModalVisibility, setShowSignUpModal] = useState(false);
+
     const [email, setEmail] = useState("");
+    const [emailfree, setEmailFree] = useState("");
+
     const [password, setPass] = useState("");
+    const [passwordfree, setPassFree] = useState("");
+
     const [error, setError] = useState("");
+    const [errorfree, setErrorFree] = useState("");
 
     const [clients, setClients] = useState([]);
     const [freelancers, setFreelancers] = useState([]);
@@ -44,12 +52,18 @@ const Home = () => {
     function openSignInModal() {
         setShowSignInModal(true);
     }
+    function openSignInfreelancerModal() {
+        setShowSignInfreelancerModal(true);
+    }
     function openSignUpModal() {
         setShowSignUpModal(true);
     }
 
     function closeSignInModal() {
         setShowSignInModal(false);
+    }
+    function closeSignInFreelancerModal() {
+        setShowSignInfreelancerModal(false);
     }
     function closeSignUpModal() {
         setShowSignUpModal(false);
@@ -59,26 +73,11 @@ const Home = () => {
         e.preventDefault();
         console.log(email);
         console.log(password);
-        // const res = await axios.get('http://localhost:3000/clients/login', {
-        //     headers: { 'email': email, 'password': password }
-        // });
-        // console.log(res.data === "");
-        // console.log(res.password);
-        // if (res.email === email) {
-        //     console.log("correct email");
-        //     if (res.password === password) {
-        //         console.log("correct pass");
-        //     } else {
 
-        //         console.log("invalid credentials");
-        //     }
-        // }
         if (email != "" && password != "") {
             const res = await axios.get('http://localhost:3000/clients/login', {
                 headers: { 'email': email, 'password': password }
             });
-            console.log(res.data.email);
-            console.log(res.data.password);
 
             if(res.data != "")
             {
@@ -95,6 +94,34 @@ const Home = () => {
         }
 
     }
+    async function handlesubmitfreelancer(e) {
+        e.preventDefault();
+
+        console.log(emailfree);
+        console.log(passwordfree);
+
+        if (emailfree != "" && passwordfree != "") {
+            console.log("entered the if");
+            const res = await axios.get('http://localhost:3000/freelancer/login', {
+                headers: { 'email': emailfree, 'password': passwordfree }
+            });
+            console.log(res);
+
+            if(res.data != "")
+            {
+                const path = "/freelancer/";
+                const result = path.concat(res.data.id);
+                // console.log(result);
+                router.push(result);
+            }else{
+                setErrorFree("Invalid Credentials");
+            }
+
+        }else{
+            setErrorFree("Enter Credentials");
+        }
+
+    }
 
     return (
         <>
@@ -106,7 +133,8 @@ const Home = () => {
                         <div className="flex items-center space-x-5 text-xs">
                             <div className="space-x-5">
                                 <Button handleClick={openSignUpModal} text="Sign Up" design="bg-white text-black px-5 py-2 rounded font-bold" />
-                                <Button handleClick={openSignInModal} text="Sign In" design="text-white border px-5 py-2 rounded font-bold" />
+                                <Button handleClick={openSignInModal} text="Sign In Client" design="text-white border px-5 py-2 rounded font-bold" />
+                                <Button handleClick={openSignInfreelancerModal} text="Sign In Freelancer" design="text-white border px-5 py-2 rounded font-bold" />
                             </div>
                         </div>
                     </>
@@ -145,6 +173,36 @@ const Home = () => {
                     </div>
                 } />
             }
+            {signInfreelancerModalVisibility && <Modal closeModal={closeSignInFreelancerModal}
+                content=
+                {
+                    <div className="relative bg-white rounded-lg border-2">
+                        <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 className="text-xl font-semibold text-gray-900">
+                                Sign in to our platform
+                            </h3>
+                        </div>
+                        <div className="p-4 md:p-5">
+                            <form className="space-y-4" onSubmit={handlesubmitfreelancer}>
+                                <div>
+                                    <label for="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                                    <input type="email" name="email" id="email" value={emailfree} onChange={(e) => setEmailFree(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" />
+                                </div>
+                                <div>
+                                    <label for="password" className="block mb-2 text-sm font-medium text-gray-900">Your password</label>
+                                    <input type="password" name="password" id="password" value={passwordfree} onChange={(e) => setPassFree(e.target.value)} placeholder="••••••••••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+                                </div>
+                                <div className="flex justify-between">
+                                    <div className="flex items-start">
+                                    </div>
+                                </div>
+                                <Button text="Login to your account" design="w-full text-white bg-[#20bc74] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit" />
+                                <p className="text-center text-red-700 font-bold">{errorfree}</p>
+                            </form>
+                        </div>
+                    </div>
+                } />
+            }
             {signUpModalVisibility && <Modal closeModal={closeSignUpModal}
                 content=
                 {
@@ -164,6 +222,7 @@ const Home = () => {
             }
             <Achievement/>
             <Courses/>
+            <FreelancerCourses/>
             <Footer/>
         </>
     );
