@@ -1,27 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { GoSignOut } from "react-icons/go";
 import Image from "next/image";
 import { useAuth } from "../utils/authContext";
 import { useRouter } from "next/router";
+import { DrawerContext } from "../utils/drawerContext";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const { isOpen, openDrawer, closeDrawer } = useContext(DrawerContext);
 
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen);
-  };
+  const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const [jsonData, setJsonData] = useState("");
+  const router = useRouter();
+  const { user, logout, checkUser } = useAuth();
+
+  useEffect(() => {
+    checkSession();
+  }, []);
+
+  function checkSession() {
+    if (user != null) {
+      fetchData();
+      console.log("user:  " + user.username);
+      console.log("user:  " + user.cookie);
+    } else {
+      router.push("/moderator/Login");
+    }
+  }
+
+  async function fetchData() {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/moderator/find/" + user.username
+      );
+      const jsonData = response.data;
+      console.log(jsonData);
+      setJsonData(jsonData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleLogout = () => {
+    logout();
+    router.push("/moderator/Login");
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
       <button
         className="p-4 bg-blue-500 text-white rounded transform hover:scale-105 transition-transform dark:bg-blue-700"
-        onClick={toggleDrawer}
+        onClick={openDrawer}
       >
         <GoSignOut />
       </button>
@@ -33,7 +67,7 @@ const Sidebar = () => {
       >
         <button
           className="relative top-0 right-0 p-4 mx-24 my-2 py-2 bg-red-500 text-white rounded dark:bg-red-700 w-fit"
-          onClick={toggleDrawer}
+          onClick={closeDrawer}
         >
           Close
         </button>

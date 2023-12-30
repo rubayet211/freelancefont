@@ -5,17 +5,17 @@ import { useRouter } from "next/router";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [moderator, setModerator] = useState(null);
+  const [user, setUser] = useState(null);
   const router = useRouter();
 
   const signin = async (username, cookie) => {
-    setModerator({ username, cookie });
+    setUser({ username, cookie });
   };
 
-  const checkModerator = () => {
-    console.log("user:" + moderator?.username);
-    console.log("cookie:" + moderator?.cookie);
-    return moderator?.username && moderator?.cookie;
+  const checkUser = () => {
+    console.log("user:" + user?.username);
+    console.log("cookie:" + user?.cookie);
+    return user?.username && user?.cookie;
   };
 
   const logout = async () => {
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
         }
       );
       console.log(response);
-      setModerator(null);
+      setUser(null);
       document.cookie = null;
 
       router.push("/moderator/login");
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ moderator, signin, checkModerator, logout }}>
+    <AuthContext.Provider value={{ user, signin, checkUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
