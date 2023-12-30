@@ -1,19 +1,20 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import axios from "axios";
 import { useAuth } from "./utils/authContext";
 import Header from "../components/header";
+import ModNavBar from "./components/modnavbar";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false); // [1
   const [error, setError] = useState("");
-  const { signin } = useAuth(); // Using the signin method from the AuthContext
+  const { signin, user, checkUser } = useAuth(); // Using the signin method from the AuthContext
   const router = useRouter();
 
   const handleChangeUsername = (e) => {
@@ -54,6 +55,32 @@ const Login = () => {
     }
   };
 
+  function checkSession() {
+    if (user != null) {
+      fetchData();
+      console.log("user:  " + user.username);
+      console.log("user:  " + user.cookie);
+      checkUser();
+    } else {
+      router.push("/moderator/Login");
+    }
+  }
+  const fetchData = async () => {
+    // Check if user.cookie is defined
+    if (user.cookie) {
+      // Redirect to login page if user.cookie is not defined
+      router.push("/moderator/dashboard");
+
+      return;
+    } else {
+      router.push("/moderator/Login");
+    }
+  };
+  useEffect(() => {
+    checkSession();
+    fetchData();
+  }, []);
+
   async function doSignIn(username, password) {
     try {
       const response = await axios.post(
@@ -92,7 +119,7 @@ const Login = () => {
     <>
       <Header page={"Moderator | Login"} />
       <main>
-        <Navbar />
+        <ModNavBar />
         <div className="container mx-auto w-full ">
           <div className="h-screen grid-cols-2 grid items-center gap-10">
             <div className="flex flex-col items-center justify-center px-28 pt-20 bg-emerald-50 dark:bg-gradient-to-r from-slate-900 via-emerald-900 to-sky-900 py-20 h-[70%]">
@@ -198,21 +225,8 @@ const Login = () => {
                       </div>
 
                       <div className="flex items-center">
-                        <div className="flex">
-                          <input
-                            id="remember-me"
-                            name="remember-me"
-                            type="checkbox"
-                            className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                          />
-                        </div>
+                        <div className="flex"></div>
                         <div className="ms-3 flex flex-row justify-around">
-                          <label
-                            htmlFor="remember-me"
-                            className="text-sm dark:text-white"
-                          >
-                            Remember me
-                          </label>
                           <Link
                             className="text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                             href="../examples/html/recover-account.html"
@@ -238,16 +252,6 @@ const Login = () => {
                       {error && (
                         <p className="text-xl text-red-600 mt-2">{error}</p>
                       )}
-                      <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                        Do not have an account yet? &nbsp;
-                      </p>
-                      <button
-                        type="button"
-                        onClick={handleNewUser}
-                        className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                      >
-                        Register
-                      </button>
                     </div>
                   </form>
                 </div>

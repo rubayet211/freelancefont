@@ -4,7 +4,7 @@ import React from "react";
 
 function ModNavBar() {
   return (
-    <div className="bg-slate-800 static top-0">
+    <div className="dark:bg-slate-800 bg-green-300 static top-0">
       <Navbar
         design="flex justify-between items-center py-3 px-5"
         template={

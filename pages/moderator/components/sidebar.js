@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useAuth } from "../utils/authContext";
 import { useRouter } from "next/router";
 import { DrawerContext } from "../utils/drawerContext";
+import axios from "axios";
 
 const Sidebar = () => {
   const { isOpen, openDrawer, closeDrawer } = useContext(DrawerContext);
@@ -21,6 +22,15 @@ const Sidebar = () => {
 
   useEffect(() => {
     checkSession();
+    const fetchData = async () => {
+      // Check if user.cookie is defined
+      if (!user.cookie) {
+        // Redirect to login page if user.cookie is not defined
+        router.push("/moderator/Login");
+
+        return;
+      }
+    };
   }, []);
 
   function checkSession() {
@@ -28,6 +38,7 @@ const Sidebar = () => {
       fetchData();
       console.log("user:  " + user.username);
       console.log("user:  " + user.cookie);
+      checkUser();
     } else {
       router.push("/moderator/Login");
     }
@@ -45,6 +56,8 @@ const Sidebar = () => {
       console.error(error);
     }
   }
+
+  const imageUrl = URL.createObjectURL(new Blob([jsonData.imageData]));
 
   const handleLogout = () => {
     logout();
@@ -73,16 +86,15 @@ const Sidebar = () => {
         </button>
         <div className="flex flex-col items-center justify-center p-4">
           <Image
-            src="/path/to/profile/pic"
-            alt="Profile Pic"
-            className="w-24 h-24 rounded-full"
-            width={100}
-            height={100}
+            src="/rocketdab.png"
+            alt="Description of image"
+            width={50}
+            height={50}
           />
           <h2 className="mt-2 text-lg font-semibold text-gray-700 dark:text-white">
-            Name
+            {jsonData.username}
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-300">Role</p>
+          <p className="text-sm text-gray-500 dark:text-gray-300">Moderator</p>
         </div>
         <div className="flex-grow p-4">
           <ul className="space-y-2">
@@ -183,10 +195,14 @@ const Sidebar = () => {
                   <div className="items-center gap-2 mt-3 sm:flex">
                     <button
                       className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                      onClick={toggleModal}
+                      onClick={() => {
+                        toggleModal();
+                        handleLogout();
+                      }}
                     >
                       Yes
                     </button>
+
                     <button
                       className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
                       onClick={toggleModal}
