@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([null]);
   const router = useRouter();
 
   const signin = async (username, cookie) => {
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   const doSignOut = async () => {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         "http://localhost:3000/moderator/logout",
         { withCredentials: true },
         {
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       );
       console.log(response);
       setUser(null);
-      document.cookie = null;
+      document.cookie = `${user.cookie}=; Max-Age=0`;
 
       router.push("/moderator/login");
     } catch (error) {
