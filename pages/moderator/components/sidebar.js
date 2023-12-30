@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { GoSignOut } from "react-icons/go";
+import Image from "next/image";
+import { useAuth } from "../utils/authContext";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,10 +38,12 @@ const Sidebar = () => {
           Close
         </button>
         <div className="flex flex-col items-center justify-center p-4">
-          <img
+          <Image
             src="/path/to/profile/pic"
             alt="Profile Pic"
             className="w-24 h-24 rounded-full"
+            width={100}
+            height={100}
           />
           <h2 className="mt-2 text-lg font-semibold text-gray-700 dark:text-white">
             Name
@@ -49,7 +54,16 @@ const Sidebar = () => {
           <ul className="space-y-2">
             <li>
               <Link
-                href="/admin"
+                href="/moderator/dashboard"
+                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+              >
+                Dashboard
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/moderator/dashboard/admin"
                 className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
               >
                 Admin
@@ -57,7 +71,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href="/moderator"
+                href="/moderator/dashboard/moderator"
                 className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
               >
                 Moderator
@@ -65,7 +79,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href="/announcement"
+                href="/moderator/dashboard/announcement"
                 className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
               >
                 Announcement
@@ -73,7 +87,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href="/report"
+                href="/moderator/dashboard/report"
                 className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
               >
                 Report
@@ -81,7 +95,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href="/client"
+                href="/moderator/dashboard/client"
                 className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
               >
                 Client
@@ -89,7 +103,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href="/freelancer"
+                href="/moderator/dashboard/freelancer"
                 className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
               >
                 Freelancer

@@ -24,6 +24,12 @@ const Home = () => {
 
     const [error, setError] = useState("");
     const [errorfree, setErrorFree] = useState("");
+  const [signInModalVisibility, setShowSignInModal] = useState(false);
+  const [signUpModalVisibility, setShowSignUpModal] = useState(false);
+  const [admodSignModal, setAdmodSignModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPass] = useState("");
+  const [error, setError] = useState("");
 
   const [clients, setClients] = useState([]);
   const [freelancers, setFreelancers] = useState([]);
@@ -60,15 +66,12 @@ const Home = () => {
     }
   }
 
-    function closeSignInModal() {
-        setShowSignInModal(false);
-    }
-    function closeSignInFreelancerModal() {
-        setShowSignInfreelancerModal(false);
-    }
-    function closeSignUpModal() {
-        setShowSignUpModal(false);
-    }
+  function closeSignInModal() {
+    setShowSignInModal(false);
+  }
+  function closeSignUpModal() {
+    setShowSignUpModal(false);
+  }
 
     async function handlesubmit(e) {
         e.preventDefault();
@@ -145,89 +148,105 @@ const Home = () => {
             <Hero/>
             <Companies/>
 
-            {signInModalVisibility && <Modal closeModal={closeSignInModal}
-                content=
-                {
-                    <div className="relative bg-white rounded-lg border-2">
-                        <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                            <h3 className="text-xl font-semibold text-gray-900">
-                                Sign in to our platform
-                            </h3>
-                        </div>
-                        <div className="p-4 md:p-5">
-                            <form className="space-y-4" onSubmit={handlesubmit}>
-                                <div>
-                                    <label for="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                                    <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" />
-                                </div>
-                                <div>
-                                    <label for="password" className="block mb-2 text-sm font-medium text-gray-900">Your password</label>
-                                    <input type="password" name="password" id="password" value={password} onChange={(e) => setPass(e.target.value)} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
-                                </div>
-                                <div className="flex justify-between">
-                                    <div className="flex items-start">
-                                    </div>
-                                </div>
-                                <Button text="Login to your account" design="w-full text-white bg-[#20bc74] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit" />
-                                <p className="text-center text-red-700 font-bold">{error}</p>
-                            </form>
-                        </div>
-                    </div>
-                } />
-            }
-            {signInfreelancerModalVisibility && <Modal closeModal={closeSignInFreelancerModal}
-                content=
-                {
-                    <div className="relative bg-white rounded-lg border-2">
-                        <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                            <h3 className="text-xl font-semibold text-gray-900">
-                                Sign in to our platform
-                            </h3>
-                        </div>
-                        <div className="p-4 md:p-5">
-                            <form className="space-y-4" onSubmit={handlesubmitfreelancer}>
-                                <div>
-                                    <label for="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                                    <input type="email" name="email" id="email" value={emailfree} onChange={(e) => setEmailFree(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" />
-                                </div>
-                                <div>
-                                    <label for="password" className="block mb-2 text-sm font-medium text-gray-900">Your password</label>
-                                    <input type="password" name="password" id="password" value={passwordfree} onChange={(e) => setPassFree(e.target.value)} placeholder="••••••••••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
-                                </div>
-                                <div className="flex justify-between">
-                                    <div className="flex items-start">
-                                    </div>
-                                </div>
-                                <Button text="Login to your account" design="w-full text-white bg-[#20bc74] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit" />
-                                <p className="text-center text-red-700 font-bold">{errorfree}</p>
-                            </form>
-                        </div>
-                    </div>
-                } />
-            }
-            {signUpModalVisibility && <Modal closeModal={closeSignUpModal}
-                content=
-                {
-                    <>
-                        <div class="border-[#20bc74] border-4 h-[500px] w-[500px] grid grid-cols-2">
-                            <a href="/signup/freelancer" className="text-center border-[#20bc74] border-r-2 bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]">
-                                <p className="text-black text-3xl font-bold py-3 px-5 text-center">Become a freelancer</p>
-                                <p className="text-black text-xl font-bold py-3 px-5">Our platform has {freelancers.length} freelancers</p>
-                            </a>
-                            <a href="/signup/client" className="border-black text-center bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]">
-                                <p className="text-black text-3xl font-bold py-3 px-5">Become a client</p>
-                                <p className="text-black text-xl font-bold py-3 px-5">Our platform has {clients.length} clients</p>
-                            </a>
-                        </div>
-                    </>
-                } />
-            }
-            <Achievement/>
-            <Courses/>
-            <FreelancerCourses/>
-            <Footer/>
-        </>
-    );
-}
+      {signInModalVisibility && (
+        <Modal
+          closeModal={closeSignInModal}
+          content={
+            <div className="relative bg-white rounded-lg border-2">
+              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 className="text-xl font-semibold text-gray-900">
+                  Sign in to our platform
+                </h3>
+              </div>
+              <div className="p-4 md:p-5">
+                <form className="space-y-4" onSubmit={handlesubmit}>
+                  <div>
+                    <label
+                      for="email"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Your email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      placeholder="name@company.com"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="password"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Your password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPass(e.target.value)}
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="flex items-start"></div>
+                  </div>
+                  <Button
+                    text="Login to your account"
+                    design="w-full text-white bg-[#20bc74] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="submit"
+                  />
+                  <p className="text-center text-red-700 font-bold">{error}</p>
+                </form>
+              </div>
+            </div>
+          }
+        />
+      )}
+      {signUpModalVisibility && (
+        <Modal
+          closeModal={closeSignUpModal}
+          content={
+            <>
+              <div class="border-[#20bc74] border-4 h-[500px] w-[500px] grid grid-cols-2">
+                <Link
+                  href="/signup/freelancer"
+                  className="text-center border-[#20bc74] border-r-2 bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]"
+                >
+                  <p className="text-black text-3xl font-bold py-3 px-5 text-center">
+                    Become Link freelancer
+                  </p>
+                  <p className="text-black text-xl font-bold py-3 px-5">
+                    Our platform has {freelancers.length} freelancers
+                  </p>
+                </Link>
+                <Link
+                  href="/signup/client"
+                  className="border-black text-center bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]"
+                >
+                  <p className="text-black text-3xl font-bold py-3 px-5">
+                    Become Link client
+                  </p>
+                  <p className="text-black text-xl font-bold py-3 px-5">
+                    Our platform has {clients.length} clients
+                  </p>
+                </Link>
+              </div>
+            </>
+          }
+        />
+      )}
+      <Achievement />
+      <Courses />
+      <Footer />
+    </>
+  );
+};
 
 export default Home;
