@@ -3,10 +3,13 @@ import ReportItem from "../../components/reportitem";
 import ModNavBar from "../../components/modnavbar";
 import Sidebar from "../../components/sidebar";
 import Footer from "@/pages/components/Footer";
+import { useRouter } from "next/router";
 
 export default function Reports() {
   const [reports, setReports] = useState([]);
   const [error, setError] = useState(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     fetch("http://localhost:3000/reports")
@@ -32,6 +35,17 @@ export default function Reports() {
     return (
       <>
         <ModNavBar />
+        <div className="flex justify-center pt-5 pb-5">
+          <button
+            className="btn btn-wide btn-primary"
+            onClick={() => {
+              router.push("/moderator/dashboard/report/create");
+            }}
+          >
+            Create Report
+          </button>
+        </div>
+
         <div className="flex h-screen">
           <Sidebar />
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pl-72">
