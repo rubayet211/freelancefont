@@ -119,10 +119,9 @@ const Login = () => {
     <>
       <Header page={"Moderator | Login"} />
       <main>
-        <ModNavBar />
         <div className="container mx-auto w-full ">
           <div className="h-screen grid-cols-2 grid items-center gap-10">
-            <div className="flex flex-col items-center justify-center px-28 pt-20 bg-emerald-50 dark:bg-gradient-to-r from-slate-900 via-emerald-900 to-sky-900 py-20 h-[70%]">
+            <div className="flex flex-col items-center justify-center px-28 shadow rounded pt-20 bg-emerald-100 dark:bg-gradient-to-r from-slate-900 via-emerald-900 to-sky-900 py-20 h-[70%]">
               <Image
                 src="/login.png"
                 alt="Login Page"
@@ -144,7 +143,7 @@ const Login = () => {
                 board! 🚀
               </p>
             </div>
-            <div className="flex flex-col justify-center bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700 py-20 h-[70%]">
+            <div className="flex flex-col justify-center bg-slate-50 border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700 py-20 h-[70%]">
               <div className="p-4 sm:p-7">
                 <div className="text-center">
                   <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
