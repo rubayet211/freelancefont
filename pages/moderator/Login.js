@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import axios from "axios";
 import { useAuth } from "./utils/authContext";
-import Header from "../components/header";
+import Header from "../components/Header";
 import ModNavBar from "./components/modnavbar";
 
 const Login = () => {
