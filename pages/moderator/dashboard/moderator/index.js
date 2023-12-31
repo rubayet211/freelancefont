@@ -7,6 +7,10 @@ import ModNavBar from "../../components/modnavbar";
 import { useRouter } from "next/router";
 import { useAuth } from "../../utils/authContext";
 import axios from "axios";
+import { FaTrash } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
+import Link from "next/link";
+import SearchFilter from "../../components/searchfetch";
 
 function Moderator() {
   const [data, setData] = useState(null);
@@ -19,7 +23,7 @@ function Moderator() {
       console.log("user.cookie:", user.cookie); // Add this line
 
       if (!user.cookie) {
-        router.push("/moderator/Login");
+        logout();
         return;
       }
       try {
@@ -47,13 +51,7 @@ function Moderator() {
         <Sidebar />
         <div className="flex-1 flex flex-col overflow-hidden ml-48">
           <main className="flex-1 overflow-x-hidden overflow-y-auto ">
-            <div className="container mx-auto w-full py-20">
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered w-full max-w-xsr"
-              />
-            </div>
+            <SearchFilter />
             <div className="container mx-auto px-6 py-8">
               <h3 className="text-gray-700 text-3xl font-medium dark:text-slate-100">
                 List of Moderators
@@ -103,31 +101,43 @@ function Moderator() {
                               {item.filename}
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                              <Image
-                                src={item.imageUrl} // Replace with the actual property name
-                                width={30}
-                                height={30}
-                                alt="user"
-                              />
-                            </td>
-                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                              <button className="ml-6">
-                                <Image
-                                  src="/edit.svg"
-                                  alt="edit icon"
-                                  width={24}
-                                  height={24}
-                                />
+                              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
+                                <Link
+                                  href={`/moderator/dashboard/moderator/${item.id}`}
+                                >
+                                  View
+                                </Link>
                               </button>
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                              <button className="ml-6">
-                                <Image
-                                  src="/delete.svg"
-                                  alt="delete icon"
-                                  width={24}
-                                  height={24}
-                                />
+                              <button
+                                className="ml-6"
+                                onClick={router.push(
+                                  `/moderator/dashboard/moderator/${item.id}/edit`
+                                )}
+                              >
+                                <FaEdit className="text-green-400 text-2xl" />
+                              </button>
+                            </td>
+                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                              <button
+                                className="ml-6"
+                                onClick={async () => {
+                                  try {
+                                    const response = await axios.delete(
+                                      `http://localhost:3000/moderator/${item.id}`
+                                    );
+                                    console.log(response.data);
+                                    // Refresh the data or remove the item from the state
+                                  } catch (error) {
+                                    console.error(
+                                      "Error deleting moderator:",
+                                      error
+                                    );
+                                  }
+                                }}
+                              >
+                                <FaTrash className="text-red-500 text-2xl" />
                               </button>
                             </td>
                           </tr>
