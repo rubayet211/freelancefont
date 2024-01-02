@@ -126,7 +126,8 @@ const Home = () => {
             setErrorFree("Enter Credentials");
         }
 
-    }
+      <Hero />
+      <Companies />
 
     return (
         <>
@@ -145,8 +146,16 @@ const Home = () => {
                     </>
                 } />
 
-            <Hero/>
-            <Companies/>
+      <Achievement />
+      <Courses />
+      <div className="flex justify-center">
+        <button
+          className="group-hover:block text-transparent hover:text-white hover:bg-green-500 font-bold py-2 px-4 rounded"
+          onClick={() => setAdmodSignModal(true)}
+        >
+          Privilege
+        </button>
+      </div>
 
       {signInModalVisibility && (
         <Modal

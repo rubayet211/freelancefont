@@ -1,5 +1,3 @@
-import "@/styles/globals.css";
-import "@/styles/App.css";
 import "../styles/globals.css";
 import { AuthProvider } from "./moderator/utils/authContext";
 import { DrawerProvider } from "./moderator/utils/drawerContext";
