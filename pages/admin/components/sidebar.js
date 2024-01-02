@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { GoSignOut } from "react-icons/go";
 import Image from "next/image";
-import { useAuth } from "../utils/authContext";
-import { useRouter } from "next/router";
 import { DrawerContext } from "../utils/drawerContext";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const { isOpen, openDrawer, closeDrawer } = useContext(DrawerContext);
@@ -18,36 +17,26 @@ const Sidebar = () => {
 
   const [jsonData, setJsonData] = useState("");
   const router = useRouter();
-  const { user, logout, checkUser } = useAuth();
 
   useEffect(() => {
     checkSession();
     const fetchData = async () => {
       // Check if user.cookie is defined
-      if (!user.cookie) {
-        // Redirect to login page if user.cookie is not defined
-        router.push("/moderator/Login");
-
-        return;
-      }
+      // Redirect to login page if user.cookie is not defined
+      // You can add your own logic for checking the session, if needed
     };
+    fetchData();
   }, []);
 
   function checkSession() {
-    if (user != null) {
-      fetchData();
-      console.log("user:  " + user.username);
-      console.log("user:  " + user.cookie);
-      checkUser();
-    } else {
-      router.push("/moderator/Login");
-    }
+    // You can add your own logic for checking the session, if needed
   }
 
   async function fetchData() {
+    // You can add your own logic for fetching data, if needed
     try {
       const response = await axios.get(
-        "http://localhost:3000/moderator/find/" + user.username
+        "http://localhost:3000/admin/find/" + user.username
       );
       const jsonData = response.data;
       console.log(jsonData);
@@ -60,14 +49,14 @@ const Sidebar = () => {
   const imageUrl = URL.createObjectURL(new Blob([jsonData.imageData]));
 
   const handleLogout = () => {
-    logout();
-    router.push("/moderator/Login");
+    // You can add your own logic for handling logout, if needed
+    router.push("/admin/Login");
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
       <button
-        className="p-4 bg-blue-500 text-white rounded transform hover:scale-105 transition-transform dark:bg-blue-700"
+        className="p-4 bg-blue-500 text-white rounded transform hover:scale-105 transition-transform "
         onClick={openDrawer}
       >
         <GoSignOut />
@@ -79,29 +68,29 @@ const Sidebar = () => {
         } dark:bg-gray-800`}
       >
         <button
-          className="relative top-0 right-0 p-4 mx-24 my-2 py-2 bg-red-500 text-white rounded dark:bg-red-700 w-fit"
+          className="relative top-0 right-0 p-4 mx-24 my-2 py-2 bg-red-500 text-white rounded "
           onClick={closeDrawer}
         >
           Close
         </button>
         <div className="flex flex-col items-center justify-center p-4">
           <Image
-            src="/rocketdab.png"
+            src="/contact.png"
             alt="Description of image"
             width={50}
             height={50}
           />
-          <h2 className="mt-2 text-lg font-semibold text-gray-700 dark:text-white">
+          <h2 className="mt-2 text-lg font-semibold text-gray-700 ">
             {jsonData.username}
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-300">Moderator</p>
+          <p className="text-sm text-gray-500 dark:text-gray-300">Admin</p>
         </div>
         <div className="flex-grow p-4">
           <ul className="space-y-2">
             <li>
               <Link
-                href="/moderator/dashboard"
-                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+                href="/admin/dashboard"
+                className="block py-1 px-3 rounded bg-blue-500 text-white "
               >
                 Dashboard
               </Link>
@@ -109,48 +98,48 @@ const Sidebar = () => {
 
             <li>
               <Link
-                href="/moderator/dashboard/admin"
-                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+                href="/admin/dashboard/admin"
+                className="block py-1 px-3 rounded bg-blue-500 text-white dark:text-white"
               >
                 Admin
               </Link>
             </li>
             <li>
               <Link
-                href="/moderator/dashboard/moderator"
-                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+                href="/admin/dashboard/moderator"
+                className="block py-1 px-3 rounded bg-blue-500 text-white  dark:text-white"
               >
                 Moderator
               </Link>
             </li>
             <li>
               <Link
-                href="/moderator/dashboard/announcement"
-                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+                href="/admin/dashboard/announcement"
+                className="block py-1 px-3 rounded bg-blue-500 text-white  dark:text-white"
               >
                 Announcement
               </Link>
             </li>
             <li>
               <Link
-                href="/moderator/dashboard/report"
-                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+                href="/admin/dashboard/report"
+                className="block py-1 px-3 rounded bg-blue-500 text-white  dark:text-white"
               >
                 Report
               </Link>
             </li>
             <li>
               <Link
-                href="/moderator/dashboard/client"
-                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+                href="/admin/dashboard/client"
+                className="block py-1 px-3 rounded bg-blue-500 text-white  dark:text-white"
               >
                 Client
               </Link>
             </li>
             <li>
               <Link
-                href="/moderator/dashboard/freelancer"
-                className="block py-1 px-3 rounded bg-blue-500 text-white dark:bg-blue-700 dark:text-white"
+                href="/admin/dashboard/freelancer"
+                className="block py-1 px-3 rounded bg-blue-500 text-white  dark:text-white"
               >
                 Freelancer
               </Link>
@@ -182,7 +171,7 @@ const Sidebar = () => {
       {showModal ? (
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div
-            className="fixed inset-0 w-full h-full bg-black opacity-40"
+            className="fixed inset-0 w-full h-full bg-white opacity-40"
             onClick={toggleModal}
           ></div>
           <div className="flex items-center min-h-screen px-4 py-8">
@@ -194,7 +183,7 @@ const Sidebar = () => {
                   </h4>
                   <div className="items-center gap-2 mt-3 sm:flex">
                     <button
-                      className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                      className="w-full mt-2 p-2.5 flex-1 text-black bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                       onClick={() => {
                         toggleModal();
                         handleLogout();

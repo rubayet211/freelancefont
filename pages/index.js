@@ -242,6 +242,40 @@ const Home = () => {
           }
         />
       )}
+      {admodSignModal && (
+        <Modal
+          closeModal={closeModal}
+          content={
+            <>
+              <div class="border-[#20bc74] border-4 h-[500px] w-[500px] grid grid-cols-2">
+                <Link
+                  href="/signup/admin"
+                  className="text-center border-[#20bc74] border-r-2 bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]"
+                >
+                  <p className="text-black text-3xl font-bold py-3 px-5 text-center">
+                    Sign in as Admin
+                  </p>
+                  <p className="text-black text-xl font-bold py-3 px-5">
+                    Admin access to the platform
+                  </p>
+                </Link>
+                <Link
+                  href="/moderator/Login"
+                  className="border-black text-center bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]"
+                >
+                  <p className="text-black text-3xl font-bold py-3 px-5">
+                    Sign in as Moderator
+                  </p>
+                  <p className="text-black text-xl font-bold py-3 px-5">
+                    Moderator access to the platform
+                  </p>
+                </Link>
+              </div>
+            </>
+          }
+        />
+      )}
+
       <Achievement />
       <Courses />
       <Footer />

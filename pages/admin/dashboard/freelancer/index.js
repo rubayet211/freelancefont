@@ -5,7 +5,7 @@ import Sidebar from "../../components/sidebar";
 import Image from "next/image";
 import ModNavBar from "../../components/modnavbar";
 import { useRouter } from "next/router";
-import { useAuth } from "../../utils/authContext";
+import { useAuth } from "../../utils/useAuthentication";
 import axios from "axios";
 
 function Freelancer() {
@@ -19,7 +19,7 @@ function Freelancer() {
       console.log("user.cookie:", user.cookie); // Add this line
 
       if (!user.cookie) {
-        router.push("/moderator/Login");
+        router.push("/admin/Login");
         return;
       }
       try {
@@ -48,7 +48,7 @@ function Freelancer() {
           <main className="flex-1 overflow-x-hidden overflow-y-auto ">
             <div className="container mx-auto px-6 py-8">
               <h3 className="text-gray-700 text-3xl font-medium dark:text-slate-100">
-                Moderators
+              admins
               </h3>
               <div className="mt-4">
                 <div className="flex flex-wrap -mx-6">
