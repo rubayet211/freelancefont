@@ -10,7 +10,7 @@ export default function ReportItem({ id, title, subject }) {
         </div>
         <div className="p-4">
           <Link
-            href={`/moderator/dashboard/report/${id}`}
+            href={`/admin/dashboard/report/${id}`}
             className="text-violet-400 block mt-1 text-lg leading-tight font-medium hover:underline"
           >
             {title}

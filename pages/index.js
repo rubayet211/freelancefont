@@ -228,7 +228,7 @@ const Home = () => {
             <>
               <div class="border-[#20bc74] border-4 h-[500px] w-[500px] grid grid-cols-2">
                 <Link
-                  href="/signup/admin"
+                  href="/admin/Login"
                   className="text-center border-[#20bc74] border-r-2 bg-white flex flex-col justify-center items-center hover:bg-[#20bc74]"
                 >
                   <p className="text-black text-3xl font-bold py-3 px-5 text-center">

@@ -1,27 +1,15 @@
-import Footer from "@/pages/components/Footer";
-import Navbar from "@/pages/components/Navbar";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar";
 import Image from "next/image";
 import ModNavBar from "../../components/modnavbar";
-import { useRouter } from "next/router";
-import { useAuth } from "../../utils/authContext";
 import axios from "axios";
+import Footer from "@/pages/components/Footer";
 
 function Admin() {
   const [data, setData] = useState(null);
-  const router = useRouter(); // import { useRouter } from 'next/router';
-  const { user, logout, checkUser } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("user:", user); // Add this line
-      console.log("user.cookie:", user.cookie); // Add this line
-
-      if (!user.cookie) {
-        router.push("/moderator/Login");
-        return;
-      }
       try {
         const response = await axios.get("http://localhost:3000/admin", {
           headers: {
@@ -48,7 +36,7 @@ function Admin() {
           <main className="flex-1 overflow-x-hidden overflow-y-auto ">
             <div className="container mx-auto px-6 py-8">
               <h3 className="text-gray-700 text-3xl font-medium dark:text-slate-100">
-                Moderators
+                Admins
               </h3>
               <div className="mt-4">
                 <div className="flex flex-wrap -mx-6">
@@ -90,9 +78,6 @@ function Admin() {
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                               {item.email}
-                            </td>
-                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                              {item.filename}
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                               <Image

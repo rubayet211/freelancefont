@@ -1,44 +1,31 @@
-import Button from "@/pages/components/Button";
-import Navbar from "@/pages/components/Navbar";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "../utils/authContext";
+import Navbar from "@/pages/components/Navbar";
 
 function ModNavBar() {
   const [jsonData, setJsonData] = useState("");
   const router = useRouter();
-  const { user, logout, checkUser } = useAuth();
 
   useEffect(() => {
     checkSession();
     const fetchData = async () => {
-      // Check if user.cookie is defined
-      if (!user.cookie) {
-        // Redirect to login page if user.cookie is not defined
-        router.push("/moderator/Login");
-
-        return;
-      }
+      // You can perform any other actions if needed
     };
+    fetchData();
   }, []);
 
   function checkSession() {
-    if (user != null) {
-      fetchData();
-      console.log("user:  " + user.username);
-      console.log("user:  " + user.cookie);
-      checkUser();
-    } else {
-      router.push("/moderator/Login");
-    }
+    // You can add your own logic for checking the session, if needed
+    // For example, redirecting to the login page if the session is not valid
   }
 
   async function fetchData() {
+    // You can add your own logic for fetching data, if needed
     try {
       const response = await axios.get(
-        "http://localhost:3000/moderator/find/" + user.username
+        "http://localhost:3000/admin/find/" + user.username
       );
       const jsonData = response.data;
       console.log(jsonData);
@@ -47,6 +34,7 @@ function ModNavBar() {
       console.error(error);
     }
   }
+
   return (
     <div className="dark:bg-slate-800 bg-green-300 static top-0">
       <Navbar

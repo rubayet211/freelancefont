@@ -8,7 +8,7 @@ function ImageComponent({ id }) {
   useEffect(() => {
     const getImage = async () => {
       const response = await axios.get(
-        `http://localhost:3000/moderator/${id}/image`,
+        `http://localhost:3000/admin/${id}/image`,
         { responseType: "arraybuffer" }
       );
       const base64 = btoa(
@@ -23,6 +23,6 @@ function ImageComponent({ id }) {
     getImage();
   }, [id]);
 
-  return <Image src={`data:image/png;base64,${image}`} alt="Moderator" />;
+  return <Image src={`data:image/png;base64,${image}`} alt="admin" />;
 }
 export default ImageComponent;
